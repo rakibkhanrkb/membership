@@ -1,0 +1,295 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bitbox verification apps </title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        #fform,#aform
+        {
+            display: table;
+            margin: 0 auto;
+        }
+        h1{text-align:center;}
+        h3{text-align: center;color: brown;}
+      
+
+       
+        .form-container {
+            max-width: 350px;
+            margin: 60px auto;
+            text-align: center;
+            font-family: Arial;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #28a745;
+        }
+
+        #error-msg {
+            color: red;
+            font-size: 13px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <script>
+
+        function validateForm() {
+            var x = document.aform.anum1.value;
+            var y = document.aform.anum2.value;
+            var z = document.aform.anum3.value;
+            if (x == "" ||  y == "" || z == "" ) {
+                alert("Name must be filled out");
+                return false;
+            }
+        }
+
+        function check () {
+
+            var x=document.aform.anum3.value.length;
+
+            if(x<=4 )
+            {
+                return true;
+            }
+            else
+            {
+                var str3 = document.aform.anum3.value;
+                str3 = str3.substring(0, str3.length - 1);
+                document.aform.anum3.value = str3;
+
+
+            }
+        }
+        function check2 () {
+
+            var y=document.aform.anum2.value.length;
+            if(y<=2 )
+            {
+                return true;
+            }
+            else
+            {
+                var str2 = document.aform.anum2.value;
+                str2 = str2.substring(0, str2.length - 1);
+                document.aform.anum2.value = str2;
+
+
+            }
+        }
+
+        function check1 () {
+
+            var y=document.aform.anum1.value.length;
+            if(y<=2 )
+            {
+                return true;
+            }
+            else
+            {
+                var str1 = document.aform.anum1.value;
+                str1 = str1.substring(0, str1.length - 1);
+                document.aform.anum1.value = str1;
+
+
+            }
+        }
+
+        function dayvalidate(a,b,c)
+        {
+            if(a < b || isNaN(a))
+                return 0;
+            else if(a > c)
+                return 31;
+            else return a;
+        }
+        function monthvalidate(a,b,c)
+        {
+            if(a < b || isNaN(a))
+                return 0;
+            else if(a > c)
+                return 12;
+            else return a;
+        }
+        function yearvalidate(a,b,c)
+        {
+            if(a < b || isNaN(a))
+                return 0;
+            else if(a > c)
+                return 2021;
+            else return a;
+        }
+
+       function phonevalidate(a,b,c)
+        {
+            if(a < b || isNaN(a))
+                return 0;
+            else if(a > c)
+                return 1999999999;
+            else return a;
+        }
+
+        function  age() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            today = dd + mm * 30 + yyyy*12*30;
+
+
+            var dobdd=parseInt(document.aform.anum1.value);
+            var dobmm=parseInt(document.aform.anum2.value);
+            var dobyy=parseInt(document.aform.anum3.value);
+            var btd = dobdd + dobmm * 30 + dobyy*12*30;
+
+           var resulttotaldays=today-btd;
+            var resdd=resulttotaldays%30;
+            var emm= parseInt(resulttotaldays/30);
+            var resmm=emm%12;
+            var resyy=parseInt(emm/12);
+            document.getElementById("show1").innerHTML=resdd+" Days";
+            document.getElementById("show2").innerHTML=resmm+" Month";
+            document.getElementById("show3").innerHTML=resyy+" Year ";
+
+
+
+            const phone = document.getElementById("phone");
+            const error = document.getElementById("error-msg");
+
+            // typing এর সময় validation
+            phone.addEventListener("input", function () {
+                // শুধু সংখ্যা allow
+                this.value = this.value.replace(/[^0-9]/g, '');
+
+                if (this.value.length === 11) {
+                    error.textContent = "";
+                } else {
+                    error.textContent = "মোবাইল নাম্বার অবশ্যই ১১ সংখ্যা হতে হবে";
+                }
+            });
+
+            // submit এর সময় check
+            document.querySelector("form").addEventListener("submit", function(e) {
+                if (phone.value.length !== 11) {
+                    e.preventDefault();
+                    error.textContent = "মোবাইল নাম্বার অবশ্যই ১১ সংখ্যা হতে হবে";
+                    phone.focus();
+                }
+            });
+
+
+        }
+    </script>
+
+
+
+</head>
+<body style="align-self: center">
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">bitBox-Home</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="https://course.bitboxbd.com/">Batch-6 Registration</a></li>
+    <li class="active"><a href="https://bitboxbd.com">bitBox Book Store </a></li>
+      <li class="active"><a href="{% url 'support' %}">User Support</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<center>  
+<img width="300px" height="70px" src="{%static 'logo.png'%}" alt="image is missing"> 
+<h3>Enter Your Mobile Number For Check</h3>
+</center>  
+<br>
+
+
+<form action="{% url 'search' %}" method="POST" class="form-container">
+    {% csrf_token %} 
+    <div class="">
+    <center>
+    
+    <input type="number" name="searched" placeholder="Type your mobile no" id="phone" max="01999999999" min="01000000000" maxlength="11" onkeyup= "this.value=phonevalidate(this.value,1000000000,1999999999) required oninput="check1()>
+    <span id="error-msg"></span>
+    <button type="submit" >Check</button> 
+    </center>
+    </div>
+</form>
+
+{% block content%}
+{% endblock %}
+ 
+ <!--<br>
+ <br>   
+<h1 style="color: darkgreen">Age Calcultator</h1>
+<h3>Date of Birth</h3>
+<form action="#" name="aform"  id="aform" method="post">
+    <table width="500px">
+
+        <tr>
+            <td>Days<input type="number"  name="anum1" id="anum1" max="31" min="0" required oninput="check1()" onkeyup= "this.value=dayvalidate(this.value,0,31)"></td>
+            <td> Month <input type="number"  name="anum2" id="anum2" max="12" min="0" required oninput="check2()"  onkeyup= "this.value=monthvalidate(this.value,0,12)" ></td>
+            <td>Year  <input type="number"  name="anum3" id="anum3" max="2021" min="1971"required oninput="check()"  onkeyup= "this.value=yearvalidate(this.value,0,2021)" ></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="button"  value="Your Age " onclick="age(),validateForm()"  >
+            </td>
+        </tr>
+
+
+
+
+    </table>
+
+</form>
+<h1 style="color: darkblue"><span id="show3"></span><span id="show2"></span> <span id="show1"></span></h1>
+-->
+  
+
+
+  
+  </body>
+</html>

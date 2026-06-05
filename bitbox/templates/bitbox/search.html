@@ -1,0 +1,34 @@
+{% extends 'bitbox/base.html' %}
+
+
+{% block content %}
+
+{% if results %}
+	<h1>Congratulation!</h1>
+	<center>
+		{% for result in results %}
+  		<h2>{{result.name}}</h2>
+  		<p>{{result.batch}}</p>
+  		<p>{{result.Address}}</p>
+		{% endfor %}
+	</center>
+	
+	<div style="text-align: center;">
+  		<h3>You will get 5% discount on all bitBox products [only for bitbox Book store]</h3>
+  
+  		<ul style="list-style: none; padding: 0;">
+   		 <li>
+     		 <a href="https://bitboxbd.com" target="_blank">bitBox Book Store</a>
+    	</li>
+ 	 </ul>
+  		<p>&</p>
+ 		 <h3>10% discount on upcoming bitBox online IT job coaching (Batch-6)</h3>
+  		<h5>Contact: 01825992222</h5>
+	</div>
+
+{% else %}
+	<h1>Sorry! You are <b>Not</b> on Our Membership List </h1>
+{% endif %}
+
+ 
+{% endblock %}

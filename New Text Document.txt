@@ -1,0 +1,48 @@
+# Python
+*.pyc
+*~
+__pycache__
+
+# Env
+.env
+myvenv/
+venv/
+
+# Database
+db.sqlite3
+
+# Static folder at project root
+/static/
+
+# macOS
+._*
+.DS_Store
+.fseventsd
+.Spotlight-V100
+
+# Windows
+Thumbs.db*
+ehthumbs*.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vscode/
+.history/
+*.code-workspace
+
+
+
+echo "# membership" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/rakibkhanrkb/membership.git
+git push -u origin main
+…or push an existing repository from the command line
+git remote add origin https://github.com/rakibkhanrkb/membership.git
+git branch -M main
+git push -u origin main
+
+r*k_b 01--34

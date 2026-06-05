@@ -1,0 +1,5 @@
+Django>=3.2
+gunicorn
+whitenoise
+django-phonenumber-field
+phonenumbers
